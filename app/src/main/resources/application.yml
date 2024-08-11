@@ -1,5 +1,10 @@
 server:
   shutdown: graceful
+  port: 8181
 spring:
   application:
     name: hoode-app
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
