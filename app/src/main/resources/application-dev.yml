@@ -1,6 +1,9 @@
 spring:
+  config:
+    import: classpath:config/application-mysql.yml
   thymeleaf:
     cache: false
 hoode:
   jwt:
     secret:
+    expiration-time: 360H
