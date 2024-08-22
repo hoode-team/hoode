@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author mitu2
  */
 @RestController
-@RequestMapping(path = "")
+@RequestMapping(path = "${hoode.api-version}/article")
 public class ArticleController {
+
 }

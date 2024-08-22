@@ -3,7 +3,6 @@ package vip.hoode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import vip.hoode.configuration.HoodeProperties;
 
 @SpringBootApplication
 @EnableConfigurationProperties(HoodeProperties.class)

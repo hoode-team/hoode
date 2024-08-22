@@ -5,5 +5,6 @@ spring:
     cache: false
 hoode:
   jwt:
-    secret:
+    secret: 847a5a11-4e77-43b0-ac84-6d13db899873
     expiration-time: 360H
+  api-version: v1

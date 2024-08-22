@@ -1,0 +1,39 @@
+package vip.hoode.jpa.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.SQLRestriction;
+import vip.hoode.jpa.entity.support.AbstractEntity;
+import vip.hoode.jpa.repository.support.Queries;
+
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Entity
+@Table(name = "category")
+@SQLRestriction(Queries.CHECK_VALID_SQL)
+public class CategoryEntity extends AbstractEntity {
+
+    @Column
+    private String name;
+
+    @Column
+    private String alias;
+
+    @Column
+    private String path;
+
+    @ToString.Exclude
+    @OneToOne
+    @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private TagEntity parent;
+
+    @ToString.Exclude
+    @OneToMany
+    @JoinColumn(name = "id", referencedColumnName = "parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private List<TagEntity> children;
+
+}
