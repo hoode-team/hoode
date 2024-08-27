@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = JpaConfiguration.REPOSITORY_PACKAGE)
 public class JpaConfiguration {
 
-    public static final String BASE_PACKAGE = "vip.hoode";
+    public static final String BASE_PACKAGE = "vip.hoode.jpa";
     public static final String ENTITY_PACKAGE = BASE_PACKAGE + ".entity";
     public static final String REPOSITORY_PACKAGE = BASE_PACKAGE + ".repository";
 

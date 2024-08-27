@@ -10,7 +10,7 @@ import vip.hoode.jpa.entity.support.AbstractEntity;
  * @author mitu2
  */
 @NoRepositoryBean
-public interface CustomJpaRepositoryImplementation<T extends AbstractEntity> extends JpaRepositoryImplementation<T, Long> {
+public interface JpaRepositoryExtendImplementation<T extends AbstractEntity> extends JpaRepositoryImplementation<T, Long> {
 
     @Query(Queries.INVALID_SQL)
     @Modifying

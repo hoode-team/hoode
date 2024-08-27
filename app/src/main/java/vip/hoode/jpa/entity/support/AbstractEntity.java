@@ -5,7 +5,6 @@ import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
-import vip.hoode.constant.DataState;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,7 +20,7 @@ public abstract class AbstractEntity implements Persistable<Long>, Serializable 
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private DataState isDeleted;
+    private EntityState isDeleted;
 
     @CreatedDate
     @Column(nullable = false)
@@ -31,6 +30,7 @@ public abstract class AbstractEntity implements Persistable<Long>, Serializable 
     @Column(nullable = false)
     private Date updateTime;
 
+    @Transient
     @Override
     public boolean isNew() {
         return id != null;

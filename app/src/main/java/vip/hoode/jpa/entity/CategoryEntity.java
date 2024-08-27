@@ -1,5 +1,6 @@
 package vip.hoode.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,14 +27,16 @@ public class CategoryEntity extends AbstractEntity {
     @Column
     private String path;
 
+    @JsonIgnore
     @ToString.Exclude
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private TagEntity parent;
 
+    @JsonIgnore
     @ToString.Exclude
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private List<TagEntity> children;
+    private List<CategoryEntity> children;
 
 }

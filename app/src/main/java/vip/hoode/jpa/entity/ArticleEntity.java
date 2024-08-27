@@ -1,11 +1,11 @@
 package vip.hoode.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.SQLRestriction;
-import org.springframework.data.annotation.CreatedBy;
 import vip.hoode.jpa.entity.support.AbstractWebsiteEntity;
 import vip.hoode.jpa.repository.support.Queries;
 
@@ -29,8 +29,9 @@ public class ArticleEntity extends AbstractWebsiteEntity {
     @Column
     private Date releaseTime;
 
+    @JsonIgnore
     @ToString.Exclude
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "article_tag_relation",
             joinColumns = @JoinColumn(name = "article_id"),
@@ -38,8 +39,9 @@ public class ArticleEntity extends AbstractWebsiteEntity {
     )
     private List<TagEntity> tags;
 
+    @JsonIgnore
     @ToString.Exclude
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "article_category_relation",
             joinColumns = @JoinColumn(name = "article_id"),
@@ -47,8 +49,10 @@ public class ArticleEntity extends AbstractWebsiteEntity {
     )
     private List<CategoryEntity> categories;
 
-    @CreatedBy
-    @ManyToOne
-    private UserEntity createdBy;
+    @JsonIgnore
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_uid")
+    private UserEntity createdUser;
 
 }
