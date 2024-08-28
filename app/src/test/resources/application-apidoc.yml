@@ -1,0 +1,6 @@
+spring:
+  test:
+    restdocs:
+      uri-scheme: http
+      uri-host: ${hoode.doc.host}
+      uri-port: ${server.port}

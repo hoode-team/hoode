@@ -14,12 +14,12 @@ class ObjectConverterTest {
 
     @EqualsAndHashCode(callSuper = true)
     @Data
-    static class A extends AbstractObjectConverter<A, B> implements Serializable {
+    static class A extends AbstractObjectConverter<B> implements Serializable {
         private String name;
     }
     @EqualsAndHashCode(callSuper = true)
     @Data
-    static class B extends AbstractObjectConverter<B, A> implements Serializable {
+    static class B extends AbstractObjectConverter<A> implements Serializable {
         private String name;
     }
 
@@ -28,7 +28,7 @@ class ObjectConverterTest {
     void testCase() {
         A a = new A();
         a.setName("is a");
-        B b = a.toView();
+        B b = a.toTarget();
         assertEquals(a.getName(), b.getName());
     }
 

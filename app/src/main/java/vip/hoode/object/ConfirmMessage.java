@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ConfirmMessage implements Serializable {
 
-    private boolean isConfirmed;
+    private boolean confirmed;
 
     public static ConfirmMessage success() {
         return new ConfirmMessage(true);

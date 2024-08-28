@@ -18,12 +18,12 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping(path = "{id}")
-    public ArticleView getArticleById(@PathVariable("id") Long id) {
+    public ArticleView getById(@PathVariable("id") Long id) {
         return articleService.getById(id);
     }
 
     @DeleteMapping(path = "{id}")
-    public ConfirmMessage deleteArticleById(@PathVariable("id") Long id) {
+    public ConfirmMessage deleteById(@PathVariable("id") Long id) {
         return articleService.invalidById(id);
     }
 

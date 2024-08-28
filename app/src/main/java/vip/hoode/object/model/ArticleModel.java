@@ -12,5 +12,5 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ArticleModel extends AbstractObjectConverter<ArticleModel, ArticleView> implements Serializable {
+public class ArticleModel extends AbstractObjectConverter<ArticleView> implements Serializable {
 }

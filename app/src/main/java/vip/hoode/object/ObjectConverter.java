@@ -3,15 +3,11 @@ package vip.hoode.object;
 /**
  * @author mitu2
  */
-public interface ObjectConverter<Model, View> {
+public interface ObjectConverter<Target> {
 
-    Model toModel();
+    Target toTarget();
 
-    Model toModel(Model target, String... ignoreProperties);
-
-    View toView();
-
-    View toView(View target, String... ignoreProperties);
+    Target toTarget(Target target, String... ignoreProperties);
 
     void fill(Object source, String... ignoreProperties);
 

@@ -17,12 +17,12 @@ public abstract class AbstractWebsiteEntity extends AbstractEntity {
 
     @ToString.Exclude
     @OneToOne
-    @JoinColumn(name = "meta_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "meta_id")
     private MetaEntity meta;
 
     @ToString.Exclude
     @OneToOne
-    @JoinColumn(name = "statistic_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "statistic_id")
     private StatisticEntity statistic;
 
 

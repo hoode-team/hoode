@@ -10,31 +10,29 @@ import java.lang.reflect.Type;
 /**
  * @author mitu2
  */
-public abstract class AbstractObjectConverter<Model extends Serializable, View extends Serializable>
-        implements ObjectConverter<Model, View> {
+public abstract class AbstractObjectConverter<Target extends Serializable>
+        implements ObjectConverter<Target> {
 
-    private final Class<Model> modelClass;
-    private final Class<View> viewClass;
+    private final Class<Target> targetClass;
 
     protected AbstractObjectConverter() {
-        this.modelClass = getActualClass(0);
-        this.viewClass = getActualClass(1);
+        this.targetClass = getActualClass();
     }
 
-    private <T> Class<T> getActualClass(int position) {
+    private <T> Class<T> getActualClass() {
         Type superClass = getClass().getGenericSuperclass();
         if (superClass instanceof Class<?>) { // sanity check, should never happen
             throw new IllegalArgumentException("Internal error: TypeReference constructed without actual type information");
         }
         // noinspection unchecked
-        return (Class<T>) ((ParameterizedType) superClass).getActualTypeArguments()[position];
+        return (Class<T>) ((ParameterizedType) superClass).getActualTypeArguments()[0];
     }
 
 
     @Override
-    public Model toModel() {
+    public Target toTarget() {
         try {
-            return toModel(modelClass.getDeclaredConstructor().newInstance());
+            return toTarget(targetClass.getDeclaredConstructor().newInstance());
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e) {
             throw new RuntimeException(e);
@@ -42,26 +40,11 @@ public abstract class AbstractObjectConverter<Model extends Serializable, View e
     }
 
     @Override
-    public Model toModel(Model target, String... ignoreProperties) {
+    public Target toTarget(Target target, String... ignoreProperties) {
         BeanUtils.copyProperties(this, target, ignoreProperties);
         return target;
     }
 
-    @Override
-    public View toView() {
-        try {
-            return toView(viewClass.getDeclaredConstructor().newInstance());
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public View toView(View target, String... ignoreProperties) {
-        BeanUtils.copyProperties(this, target, ignoreProperties);
-        return target;
-    }
 
     @Override
     public void fill(Object source, String... ignoreProperties) {

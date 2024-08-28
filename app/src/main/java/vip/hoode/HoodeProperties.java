@@ -16,10 +16,17 @@ public class HoodeProperties {
 
     private Jwt jwt;
 
+    private Doc doc;
+
     @Data
     public static class Jwt {
         private String secret;
         private Duration expirationTime = Duration.ofDays(7);
+    }
+
+    @Data
+    public static class Doc {
+        private String host;
     }
 
 }

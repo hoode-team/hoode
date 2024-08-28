@@ -30,13 +30,13 @@ public class CategoryEntity extends AbstractEntity {
     @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private TagEntity parent;
+    @JoinColumn(name = "parent_id")
+    private CategoryEntity parent;
 
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "parent_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @JoinColumn(name = "id", referencedColumnName = "parent_id")
     private List<CategoryEntity> children;
 
 }

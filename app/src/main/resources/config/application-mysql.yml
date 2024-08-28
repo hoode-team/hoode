@@ -1,6 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost/hoode
+    url: jdbc:mysql://localhost/hoode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect

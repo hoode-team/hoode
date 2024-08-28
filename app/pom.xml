@@ -21,7 +21,7 @@
 		<developer/>
 	</developers>
 	<scm>
-		<connection/>
+		<connection>git@github.com:hoode-team/hoode.git</connection>
 		<developerConnection/>
 		<tag/>
 		<url/>
