@@ -28,10 +28,10 @@ public class SecurityConfiguration {
         http.httpBasic(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(configurer -> configurer
-                .requestMatchers("/admin/login")
-                .permitAll()
                 .requestMatchers("/admin/**")
                 .authenticated()
+                .requestMatchers("/admin/login")
+                .permitAll()
                 .anyRequest()
                 .permitAll()
         );

@@ -14,4 +14,4 @@ spring:
           default_constraint_mode: NO_CONSTRAINT
   profiles:
     active:
-      - dev
+      - @build.profile.active@

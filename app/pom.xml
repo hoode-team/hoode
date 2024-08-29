@@ -23,9 +23,28 @@
 	<scm>
 		<connection>git@github.com:hoode-team/hoode.git</connection>
 		<developerConnection/>
-		<tag/>
 		<url/>
+		<tag/>
 	</scm>
+	<profiles>
+		<profile>
+			<!-- 开发环境 -->
+			<id>dev</id>
+			<properties>
+				<build.profile.active>dev</build.profile.active>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<!-- 正式环境 -->
+			<id>prod</id>
+			<properties>
+				<build.profile.active>prod</build.profile.active>
+			</properties>
+		</profile>
+	</profiles>
 	<properties>
 		<jjwt.version>0.12.6</jjwt.version>
 		<java.version>17</java.version>

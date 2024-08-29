@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import vip.hoode.jpa.entity.ArticleEntity;
 import vip.hoode.jpa.repository.ArticleJpaRepository;
 import vip.hoode.object.ConfirmMessage;
+import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
 import vip.hoode.service.ArticleService;
+import vip.hoode.util.ServiceUtil;
 
 import java.util.Optional;
 
@@ -36,6 +38,16 @@ public class ArticleServiceImpl implements ArticleService {
                     return ConfirmMessage.success();
                 })
                 .orElse(ConfirmMessage.failure());
+    }
+
+    @Override
+    public ConfirmMessage save(ArticleModel model) {
+        if (model == null) {
+            return ServiceUtil.DOS("save article model must not be null");
+        }
+        ArticleEntity target = model.toTarget();
+        articleJpaRepository.save(target);
+        return ConfirmMessage.success();
     }
 
 

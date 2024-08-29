@@ -2,8 +2,8 @@ package vip.hoode.object.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import vip.hoode.jpa.entity.ArticleEntity;
 import vip.hoode.object.AbstractObjectConverter;
-import vip.hoode.object.view.ArticleView;
 
 import java.io.Serializable;
 
@@ -12,5 +12,5 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ArticleModel extends AbstractObjectConverter<ArticleView> implements Serializable {
+public class ArticleModel extends AbstractObjectConverter<ArticleEntity> implements Serializable {
 }
