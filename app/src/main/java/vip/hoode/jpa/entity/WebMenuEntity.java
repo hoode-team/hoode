@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.SQLRestriction;
-import vip.hoode.jpa.entity.support.AbstractEntity;
+import vip.hoode.jpa.entity.support.AbstractWebsiteEntity;
 import vip.hoode.jpa.repository.support.Queries;
 
 import java.util.List;
@@ -14,30 +14,25 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-@Table(name = "category")
+@Table(name = "web_menu")
 @SQLRestriction(Queries.CHECK_VALID_SQL)
-public class CategoryEntity extends AbstractEntity {
+public class WebMenuEntity extends AbstractWebsiteEntity {
 
-    @Column
-    private String name;
+    @Column(unique = true, nullable = false)
+    private String mKey;
 
-    @Column
-    private String alias;
-
-    @ToString.Exclude
-    @OneToOne
-    @JoinColumn(name = "meta_id")
-    private MetaEntity meta;
+    @OrderColumn(nullable = false)
+    private Integer mOrder;
 
     @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private CategoryEntity parent;
+    private WebMenuEntity parent;
 
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "parent_id")
-    private List<CategoryEntity> children;
+    private List<WebMenuEntity> children;
 
 }

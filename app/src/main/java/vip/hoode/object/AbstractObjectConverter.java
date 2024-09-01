@@ -10,10 +10,11 @@ import java.lang.reflect.Type;
 /**
  * @author mitu2
  */
-public abstract class AbstractObjectConverter<Target extends Serializable>
+public abstract class
+AbstractObjectConverter<Target extends Serializable>
         implements ObjectConverter<Target> {
 
-    private final Class<Target> targetClass;
+    private final transient Class<Target> targetClass;
 
     protected AbstractObjectConverter() {
         this.targetClass = getActualClass();

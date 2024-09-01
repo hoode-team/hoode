@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/hoode.iml" filepath="$PROJECT_DIR$/hoode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/hoode-app.iml" filepath="$PROJECT_DIR$/app/hoode-app.iml" />
     </modules>
   </component>
 </project>

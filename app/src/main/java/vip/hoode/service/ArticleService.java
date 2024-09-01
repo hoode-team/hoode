@@ -1,18 +1,23 @@
 package vip.hoode.service;
 
-import vip.hoode.object.ConfirmMessage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import vip.hoode.object.view.BooleanView;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
 
 /**
  * @author mitu2
  */
-public interface ArticleService  {
+public interface ArticleService {
+
+    Page<ArticleView> getPageable(ArticleModel model, Pageable pageable);
 
     ArticleView getById(long id);
 
-    ConfirmMessage invalidById(Long id);
+    BooleanView invalidById(Long id);
 
-    ConfirmMessage save(ArticleModel model);
+    BooleanView save(ArticleModel model);
+
 
 }

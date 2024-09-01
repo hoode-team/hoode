@@ -2,7 +2,6 @@ package vip.hoode.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,8 +40,8 @@ public class SecurityConfiguration {
 
 
     @Bean
-    public JwtTokenKit jwtTokenBuilder(HoodeProperties properties, Jackson2ObjectMapperBuilder builder) {
-        return new JwtTokenKit(properties, builder.createXmlMapper(false).build());
+    public JwtTokenKit jwtTokenBuilder(HoodeProperties properties/*, Jackson2ObjectMapperBuilder builder*/) {
+        return new JwtTokenKit(properties/*, builder.createXmlMapper(false).build()*/);
     }
 
 }

@@ -2,14 +2,16 @@ package vip.hoode.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vip.hoode.jpa.entity.ArticleEntity;
 import vip.hoode.jpa.repository.ArticleJpaRepository;
-import vip.hoode.object.ConfirmMessage;
+import vip.hoode.object.view.BooleanView;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
 import vip.hoode.service.ArticleService;
-import vip.hoode.util.ServiceUtil;
 
 import java.util.Optional;
 
@@ -23,6 +25,18 @@ public class ArticleServiceImpl implements ArticleService {
     private final ArticleJpaRepository articleJpaRepository;
 
     @Override
+    public Page<ArticleView> getPageable(ArticleModel model, Pageable pageable) {
+        ArticleEntity target = model.toTarget();
+        Example<ArticleEntity> example = Example.of(target);
+        return articleJpaRepository.findAll(example, pageable)
+                .map(it -> {
+                    ArticleView view = new ArticleView();
+                    view.fill(it);
+                    return view;
+                });
+    }
+
+    @Override
     public ArticleView getById(long id) {
         Optional<ArticleEntity> optional = articleJpaRepository.findById(id);
         ArticleView view = new ArticleView();
@@ -31,23 +45,20 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ConfirmMessage invalidById(Long id) {
+    public BooleanView invalidById(Long id) {
         return articleJpaRepository.findById(id)
                 .map(it -> {
                     articleJpaRepository.invalidById(id);
-                    return ConfirmMessage.success();
+                    return BooleanView.ofTrue();
                 })
-                .orElse(ConfirmMessage.failure());
+                .orElse(BooleanView.ofFalse());
     }
 
     @Override
-    public ConfirmMessage save(ArticleModel model) {
-        if (model == null) {
-            return ServiceUtil.DOS("save article model must not be null");
-        }
+    public BooleanView save(ArticleModel model) {
         ArticleEntity target = model.toTarget();
         articleJpaRepository.save(target);
-        return ConfirmMessage.success();
+        return BooleanView.ofTrue();
     }
 
 

@@ -1,6 +1,5 @@
 package vip.hoode.jpa.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,7 +28,6 @@ public class ArticleEntity extends AbstractWebsiteEntity {
     @Column
     private Date releaseTime;
 
-    @JsonIgnore
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -39,7 +37,6 @@ public class ArticleEntity extends AbstractWebsiteEntity {
     )
     private List<TagEntity> tags;
 
-    @JsonIgnore
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -49,7 +46,6 @@ public class ArticleEntity extends AbstractWebsiteEntity {
     )
     private List<CategoryEntity> categories;
 
-    @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_uid")

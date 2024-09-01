@@ -11,7 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import vip.hoode.object.ConfirmMessage;
+import vip.hoode.object.view.BooleanView;
 import vip.hoode.object.view.ArticleView;
 import vip.hoode.security.SecurityConfiguration;
 import vip.hoode.service.ArticleService;
@@ -51,7 +51,7 @@ class ArticleControllerTest {
     @Test
     void deleteById() throws Exception {
         Mockito.when(articleService.invalidById(any()))
-                .thenReturn(ConfirmMessage.success());
+                .thenReturn(BooleanView.ofTrue());
 
         mockMvc.perform(
                         delete("/{apiVersion}/article/{id}", apiVersion, 1L)
@@ -65,7 +65,7 @@ class ArticleControllerTest {
                         document(
                                 "article/{method-name}",
                                 responseFields(
-                                        fieldWithPath("confirmed").description("是否确认").optional()
+                                        fieldWithPath("bool").description("是否确认").optional()
                                 )
                         )
                 );

@@ -1,6 +1,5 @@
 package vip.hoode.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtParserBuilder;
@@ -20,11 +19,9 @@ import java.util.Date;
 public class JwtTokenKit {
 
     private final HoodeProperties properties;
-    private final ObjectMapper objectMapper;
 
-    public JwtTokenKit(HoodeProperties properties, ObjectMapper objectMapper) {
+    public JwtTokenKit(HoodeProperties properties) {
         this.properties = properties;
-        this.objectMapper = objectMapper;
     }
 
     public JwtBuilder getJwtBuilder() {
