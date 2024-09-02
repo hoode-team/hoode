@@ -11,17 +11,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import vip.hoode.object.view.BooleanView;
 import vip.hoode.object.view.ArticleView;
-import vip.hoode.security.SecurityConfiguration;
+import vip.hoode.object.view.BooleanView;
 import vip.hoode.service.ArticleService;
+import vip.hoode.web.security.SecurityConfiguration;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -63,7 +62,7 @@ class ArticleControllerTest {
                 )
                 .andDo(
                         document(
-                                "article/{method-name}",
+                                "{ClassName}/{methodName}",
                                 responseFields(
                                         fieldWithPath("bool").description("是否确认").optional()
                                 )
@@ -86,8 +85,12 @@ class ArticleControllerTest {
                 )
                 .andDo(
                         document(
-                                "article/{method-name}",
-                                responseFields(
+                                "{ClassName}/{methodName}",
+                                // relaxedPathParameters(
+                                //         parameterWithName("apiVersion").description("接口版本"),
+                                //         parameterWithName("id").description("文章ID")
+                                // ),
+                                relaxedResponseFields(
                                         fieldWithPath("name").description("文章名称").optional(),
                                         fieldWithPath("meta").description("元信息").optional(),
                                         fieldWithPath("statistic").description("统计信息").optional(),

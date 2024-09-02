@@ -1,4 +1,4 @@
-package vip.hoode.security;
+package vip.hoode.web.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;

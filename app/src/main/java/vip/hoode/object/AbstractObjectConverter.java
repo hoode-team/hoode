@@ -31,19 +31,20 @@ AbstractObjectConverter<Target extends Serializable>
 
 
     @Override
-    public Target toTarget() {
-        try {
-            return toTarget(targetClass.getDeclaredConstructor().newInstance());
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+    public Target toTarget(String... ignoreProperties) {
+        return toTarget(targetClass, ignoreProperties);
     }
 
     @Override
-    public Target toTarget(Target target, String... ignoreProperties) {
-        BeanUtils.copyProperties(this, target, ignoreProperties);
-        return target;
+    public <T extends Serializable> T toTarget(Class<T> targetClass, String... ignoreProperties) {
+        try {
+            T target = targetClass.getDeclaredConstructor().newInstance();
+            BeanUtils.copyProperties(this, target, ignoreProperties);
+            return target;
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException |
+                 InstantiationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

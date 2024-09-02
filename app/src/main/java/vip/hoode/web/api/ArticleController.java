@@ -9,9 +9,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import vip.hoode.object.view.BooleanView;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
+import vip.hoode.object.view.BooleanView;
 import vip.hoode.service.ArticleService;
 
 /**
@@ -27,7 +27,7 @@ public class ArticleController {
 
     @GetMapping
     public Page<ArticleView> getPageable(@ModelAttribute @NotNull final ArticleModel model,
-                                         @PageableDefault  final Pageable pageable) {
+                                         @PageableDefault final Pageable pageable) {
         return articleService.getPageable(model, pageable);
     }
 
@@ -37,6 +37,7 @@ public class ArticleController {
     }
 
     @DeleteMapping(path = "{id}")
+    @PreAuthorize("isAuthenticated()")
     public BooleanView deleteById(@PathVariable("id") @NotNull Long id) {
         return articleService.invalidById(id);
     }

@@ -2,9 +2,9 @@ package vip.hoode.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import vip.hoode.object.view.BooleanView;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
+import vip.hoode.object.view.BooleanView;
 
 /**
  * @author mitu2

@@ -1,0 +1,12 @@
+server:
+  compression:
+    enabled: true
+spring:
+  config:
+    import: classpath:config/application-mysql.yml
+  thymeleaf:
+    cache: true
+hoode:
+  jwt:
+    secret: your-secret
+    expiration-time: 360H

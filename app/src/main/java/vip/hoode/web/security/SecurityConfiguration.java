@@ -1,5 +1,7 @@
-package vip.hoode.security;
+package vip.hoode.web.security;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -12,24 +14,29 @@ import vip.hoode.HoodeProperties;
 /**
  * @author mitu2
  */
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
+    private final HoodeProperties hoodeProperties;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
+        String basePath = hoodeProperties.getAdmin().getBasePath();
+
         http.csrf(AbstractHttpConfigurer::disable);
 
-        http.formLogin(configurer -> configurer.loginPage("/admin/login"));
+        http.formLogin(configurer -> configurer.loginPage(basePath + "/login"));
 
         http.httpBasic(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests(configurer -> configurer
-                .requestMatchers("/admin/**")
+                .requestMatchers(basePath + "/**")
                 .authenticated()
-                .requestMatchers("/admin/login")
+                .requestMatchers(basePath + "/login")
                 .permitAll()
                 .anyRequest()
                 .permitAll()

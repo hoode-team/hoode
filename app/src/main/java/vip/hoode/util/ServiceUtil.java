@@ -11,7 +11,7 @@ public abstract class ServiceUtil {
 
     }
 
-    public static  <T> T DOS() {
+    public static <T> T DOS() {
         throw new DenialOfServiceException();
     }
 

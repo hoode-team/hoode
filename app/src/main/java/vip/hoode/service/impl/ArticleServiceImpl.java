@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vip.hoode.jpa.entity.ArticleEntity;
 import vip.hoode.jpa.repository.ArticleJpaRepository;
-import vip.hoode.object.view.BooleanView;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
+import vip.hoode.object.view.BooleanView;
 import vip.hoode.service.ArticleService;
 
 import java.util.Optional;

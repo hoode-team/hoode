@@ -5,13 +5,22 @@ spring:
   application:
     name: hoode-app
   jpa:
+    open-in-view: true
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         hbm2ddl:
+          # not use foreign keys
           default_constraint_mode: NO_CONSTRAINT
   profiles:
     active:
       - @build.profile.active@
+  servlet:
+    multipart:
+      max-file-size: 480MB
+hoode:
+  api-version: v1
+  admin:
+    base-path: /admin

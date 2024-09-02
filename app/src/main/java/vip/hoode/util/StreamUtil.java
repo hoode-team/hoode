@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  */
 public class StreamUtil {
 
-    public static  <T> Stream<T> ofNullable(Collection<T> collection) {
+    public static <T> Stream<T> ofNullable(Collection<T> collection) {
         if (collection == null || collection.isEmpty()) {
             return Stream.empty();
         }

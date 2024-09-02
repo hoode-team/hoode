@@ -1,11 +1,11 @@
 package vip.hoode.object;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -42,25 +42,31 @@ AbstractDeepObjectConverter<Target extends Serializable>
         return (Class<T>) ((ParameterizedType) superClass).getActualTypeArguments()[0];
     }
 
-
     @Override
-    public Target toTarget() {
-        return toTarget(null);
+    public Target toTarget(String... ignoreProperties) {
+        return toTarget(targetClass, ignoreProperties);
     }
 
     @Override
-    public Target toTarget(Target target, String... ignoreProperties) {
-        SimpleFilterProvider provider = new SimpleFilterProvider();
-        provider.addFilter("ignoreProperties", SimpleBeanPropertyFilter.serializeAllExcept(new HashSet<>(Arrays.asList(ignoreProperties))));
-        return JSON_MAPPER.setFilterProvider(provider).convertValue(this, targetClass);
+    public <T extends Serializable> T toTarget(Class<T> targetClass, String... ignoreProperties) {
+        return JSON_MAPPER.setFilterProvider(createIgnorePropertiesProvider(ignoreProperties)).convertValue(this, targetClass);
     }
-
 
     @Override
     public void fill(Object source, String... ignoreProperties) {
+        try {
+            ObjectMapper filterMapper = JSON_MAPPER.setFilterProvider(createIgnorePropertiesProvider(ignoreProperties));
+            String json = filterMapper.writeValueAsString(this);
+            filterMapper.readerForUpdating(source).readValue(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private SimpleFilterProvider createIgnorePropertiesProvider(String... ignoreProperties) {
         SimpleFilterProvider provider = new SimpleFilterProvider();
         provider.addFilter("ignoreProperties", SimpleBeanPropertyFilter.serializeAllExcept(new HashSet<>(Arrays.asList(ignoreProperties))));
-        Object convertSource = JSON_MAPPER.setFilterProvider(provider).convertValue(source, this.getClass());
-        BeanUtils.copyProperties(convertSource, this, ignoreProperties);
+        return provider;
     }
+
 }
