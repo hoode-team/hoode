@@ -56,8 +56,8 @@ AbstractDeepObjectConverter<Target extends Serializable>
     public void fill(Object source, String... ignoreProperties) {
         try {
             ObjectMapper filterMapper = JSON_MAPPER.setFilterProvider(createIgnorePropertiesProvider(ignoreProperties));
-            String json = filterMapper.writeValueAsString(this);
-            filterMapper.readerForUpdating(source).readValue(json);
+            String json = filterMapper.writeValueAsString(source);
+            filterMapper.readerForUpdating(this).readValue(json);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
