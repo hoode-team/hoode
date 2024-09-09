@@ -1,9 +1,9 @@
-package vip.hoode.jpa.entity.support;
+package vip.hoode.object.type;
 
 /**
  * @author mitu2
  */
-public enum EntityState {
+public enum DataState {
 
 
     VALID,

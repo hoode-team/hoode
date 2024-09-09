@@ -1,4 +1,4 @@
-package vip.hoode.security;
+package vip.hoode.web.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 import vip.hoode.HoodeApplication;
 import vip.hoode.jpa.entity.UserEntity;
-import vip.hoode.web.security.JwtTokenKit;
 
 /**
  * @author mitu2

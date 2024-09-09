@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface WebMenuJpaRepository extends JpaRepositoryExtendImplementation<WebMenuEntity> {
 
-    List<WebMenuEntity> findAllByParentIsNotNull(Sort sort);
+    List<WebMenuEntity> findAllByParentIsNull(Sort sort);
 
 }

@@ -18,11 +18,11 @@ import java.util.List;
 @SQLRestriction(Queries.CHECK_VALID_SQL)
 public class WebMenuEntity extends AbstractWebsiteEntity {
 
-    @Column(unique = true, nullable = false)
-    private String mKey;
+    @Column(length = 50, unique = true, nullable = false)
+    private String menuKey;
 
     @OrderColumn(nullable = false)
-    private Integer mOrder;
+    private Integer menuOrder;
 
     @JsonIgnore
     @ToString.Exclude
@@ -32,7 +32,7 @@ public class WebMenuEntity extends AbstractWebsiteEntity {
 
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "parent_id")
+    @JoinColumn(name = "id", referencedColumnName = "parent_id")
     private List<WebMenuEntity> children;
 
 }

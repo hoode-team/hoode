@@ -18,10 +18,10 @@ import java.util.List;
 @SQLRestriction(Queries.CHECK_VALID_SQL)
 public class CategoryEntity extends AbstractEntity {
 
-    @Column
+    @Column(length = 50)
     private String name;
 
-    @Column
+    @Column(length = 50)
     private String alias;
 
     @ToString.Exclude
@@ -37,7 +37,7 @@ public class CategoryEntity extends AbstractEntity {
 
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "parent_id")
+    @JoinColumn(name = "id", referencedColumnName = "parent_id")
     private List<CategoryEntity> children;
 
 }

@@ -19,10 +19,10 @@ import java.util.List;
 public class ArticleEntity extends AbstractWebsiteEntity {
 
 
-    @Column
+    @Column(length = Integer.MAX_VALUE)
     private String content;
 
-    @Column
+    @Column(length = 300)
     private String contentText;
 
     @Column
@@ -45,10 +45,5 @@ public class ArticleEntity extends AbstractWebsiteEntity {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<CategoryEntity> categories;
-
-    @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_uid")
-    private UserEntity createdUser;
 
 }

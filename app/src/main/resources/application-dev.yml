@@ -3,7 +3,9 @@ spring:
     import: classpath:config/application-mysql.yml
   thymeleaf:
     cache: false
-
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
 hoode:
   jwt:
     secret: 847a5a11-4e77-43b0-ac84-6d13db899873

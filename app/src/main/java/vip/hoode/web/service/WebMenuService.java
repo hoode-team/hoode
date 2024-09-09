@@ -1,4 +1,4 @@
-package vip.hoode.service;
+package vip.hoode.web.service;
 
 import vip.hoode.object.view.TreeWebMenuView;
 

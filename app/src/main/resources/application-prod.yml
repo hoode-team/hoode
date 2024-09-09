@@ -6,6 +6,9 @@ spring:
     import: classpath:config/application-mysql.yml
   thymeleaf:
     cache: true
+  jpa:
+    hibernate:
+      ddl-auto: update
 hoode:
   jwt:
     secret: your-secret

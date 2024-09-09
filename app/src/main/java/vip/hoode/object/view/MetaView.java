@@ -15,7 +15,7 @@ public class MetaView implements Serializable {
     private String route;
     private String title;
     private String description;
-    private String author;
+    private UserView author;
     private String keywords;
     private Date createTime;
     private Date updateTime;

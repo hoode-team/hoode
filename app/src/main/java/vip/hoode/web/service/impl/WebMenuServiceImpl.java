@@ -1,4 +1,4 @@
-package vip.hoode.service.impl;
+package vip.hoode.web.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vip.hoode.jpa.repository.WebMenuJpaRepository;
 import vip.hoode.object.view.TreeWebMenuView;
-import vip.hoode.service.WebMenuService;
-import vip.hoode.util.StreamUtil;
+import vip.hoode.util.StreamUtils;
+import vip.hoode.web.service.WebMenuService;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ public class WebMenuServiceImpl implements WebMenuService {
 
     @Override
     public List<TreeWebMenuView> getTreeMenus() {
-        return StreamUtil.ofNullable(webMenuJpaRepository.findAllByParentIsNotNull(Sort.by(Sort.Order.asc("mOrder"))))
+        return StreamUtils.ofNullable(webMenuJpaRepository.findAllByParentIsNull(Sort.by(Sort.Order.asc("menuOrder"))))
                 .map(it -> {
                     TreeWebMenuView treeWebMenuView = new TreeWebMenuView();
-                    treeWebMenuView.fill(it);
+                    treeWebMenuView.fill(it, "author");
                     return treeWebMenuView;
                 })
                 .toList();

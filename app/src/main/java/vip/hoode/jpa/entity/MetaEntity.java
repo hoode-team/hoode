@@ -1,10 +1,9 @@
 package vip.hoode.jpa.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.SQLRestriction;
 import vip.hoode.jpa.entity.support.AbstractEntity;
 import vip.hoode.jpa.repository.support.Queries;
@@ -26,9 +25,11 @@ public class MetaEntity extends AbstractEntity {
     private String description;
 
     @Column
-    private String author;
-
-    @Column
     private String keywords;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_uid")
+    private UserEntity author;
 
 }

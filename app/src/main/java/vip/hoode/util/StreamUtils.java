@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 /**
  * @author mitu2
  */
-public class StreamUtil {
+public class StreamUtils {
 
     public static <T> Stream<T> ofNullable(Collection<T> collection) {
         if (collection == null || collection.isEmpty()) {

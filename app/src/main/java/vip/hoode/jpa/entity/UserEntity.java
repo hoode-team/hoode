@@ -21,7 +21,7 @@ import java.util.Collections;
 @SQLRestriction(Queries.CHECK_VALID_SQL)
 public class UserEntity extends AbstractEntity implements UserDetails {
 
-    @Column
+    @Column(length = 50)
     private String username;
 
     @Column

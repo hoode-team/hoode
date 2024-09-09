@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
 import vip.hoode.object.view.BooleanView;
-import vip.hoode.service.ArticleService;
+import vip.hoode.web.service.ArticleService;
 
 /**
  * @author mitu2

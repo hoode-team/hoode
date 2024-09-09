@@ -2,9 +2,11 @@ package vip.hoode.jpa.entity.support;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.domain.Persistable;
+import vip.hoode.object.type.DataState;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,13 +22,14 @@ public abstract class AbstractEntity implements Persistable<Long>, Serializable 
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EntityState isDeleted;
+    @ColumnDefault("'" + DataState.VALID_STATE + "'")
+    private DataState isDeleted = DataState.VALID;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(nullable = false)
     private Date createTime;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(nullable = false)
     private Date updateTime;
 

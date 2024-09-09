@@ -25,7 +25,6 @@ public class ArticleView extends AbstractDeepObjectConverter<ArticleEntity> impl
     private String content;
     private List<TagView> tags;
     private List<CategoryView> categories;
-    private UserView createdUser;
 
     private Date createTime;
     private Date updateTime;

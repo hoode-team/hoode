@@ -1,4 +1,4 @@
-package vip.hoode.service.impl;
+package vip.hoode.web.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import vip.hoode.jpa.repository.ArticleJpaRepository;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
 import vip.hoode.object.view.BooleanView;
-import vip.hoode.service.ArticleService;
+import vip.hoode.web.service.ArticleService;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package vip.hoode.service;
+package vip.hoode.web.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

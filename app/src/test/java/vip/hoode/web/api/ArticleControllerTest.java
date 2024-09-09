@@ -13,8 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import vip.hoode.object.view.ArticleView;
 import vip.hoode.object.view.BooleanView;
-import vip.hoode.service.ArticleService;
 import vip.hoode.web.security.SecurityConfiguration;
+import vip.hoode.web.service.ArticleService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;

@@ -3,7 +3,6 @@ package vip.hoode;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.io.Serializable;
 import java.time.Duration;
 
 /**
@@ -11,7 +10,7 @@ import java.time.Duration;
  */
 @Data
 @ConfigurationProperties(prefix = "hoode")
-public class HoodeProperties implements Serializable {
+public class HoodeProperties {
 
     private String apiVersion;
     private Jwt jwt;
@@ -20,6 +19,8 @@ public class HoodeProperties implements Serializable {
     @Data
     public static class Jwt {
 
+        private String header = "Authorization";
+        private String headerPrefix = "Bearer";
         private String secret;
         private Duration expirationTime = Duration.ofDays(7);
 
