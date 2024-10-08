@@ -11,6 +11,7 @@ import vip.hoode.jpa.repository.ArticleJpaRepository;
 import vip.hoode.object.model.ArticleModel;
 import vip.hoode.object.view.ArticleView;
 import vip.hoode.object.view.BooleanView;
+import vip.hoode.util.BeanCopyUtils;
 import vip.hoode.web.service.ArticleService;
 
 import java.util.Optional;
@@ -26,22 +27,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<ArticleView> getPageable(ArticleModel model, Pageable pageable) {
-        ArticleEntity target = model.toTarget();
+        ArticleEntity target = BeanCopyUtils.deepCopyProperties(model, new ArticleEntity());
         Example<ArticleEntity> example = Example.of(target);
         return articleJpaRepository.findAll(example, pageable)
-                .map(it -> {
-                    ArticleView view = new ArticleView();
-                    view.fill(it);
-                    return view;
-                });
+                .map(it -> BeanCopyUtils.deepCopyProperties(it, new ArticleView()));
     }
 
     @Override
     public ArticleView getById(long id) {
         Optional<ArticleEntity> optional = articleJpaRepository.findById(id);
-        ArticleView view = new ArticleView();
-        view.fill(optional.orElseThrow());
-        return view;
+        return BeanCopyUtils.deepCopyProperties(optional.orElseThrow(), new ArticleView());
     }
 
     @Override
@@ -56,7 +51,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public BooleanView save(ArticleModel model) {
-        ArticleEntity target = model.toTarget();
+        ArticleEntity target = BeanCopyUtils.deepCopyProperties(model, new ArticleEntity());
         articleJpaRepository.save(target);
         return BooleanView.ofTrue();
     }

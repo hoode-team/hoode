@@ -1,19 +1,20 @@
 package vip.hoode.object.view;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import vip.hoode.object.type.JsonViewGroups;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author mitu2
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class TagView implements Serializable {
+@JsonView(JsonViewGroups.Default.class)
+public class TagView extends EntityView implements Serializable {
 
-    private Long id;
     private String name;
-    private Date createTime;
-    private Date updateTime;
 
 }

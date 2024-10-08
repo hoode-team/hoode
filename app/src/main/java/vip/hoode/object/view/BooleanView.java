@@ -1,8 +1,10 @@
 package vip.hoode.object.view;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import vip.hoode.object.type.JsonViewGroups;
 
 import java.io.Serializable;
 
@@ -12,6 +14,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonView(JsonViewGroups.Default.class)
 public class BooleanView implements Serializable {
 
     private boolean bool;

@@ -1,13 +1,11 @@
 package vip.hoode.object.view;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import vip.hoode.jpa.entity.WebMenuEntity;
-import vip.hoode.object.AbstractDeepObjectConverter;
+import vip.hoode.object.type.JsonViewGroups;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,17 +13,13 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class TreeWebMenuView extends AbstractDeepObjectConverter<WebMenuEntity> implements Serializable {
+@JsonView(JsonViewGroups.Default.class)
+public class TreeWebMenuView extends EntityView implements Serializable {
 
-    private Long id;
     private String name;
     private String menuKey;
     private Integer menuOrder;
-    @JsonIgnoreProperties({"author", "createTime", "updateTime"})
     private MetaView meta;
     private List<TreeWebMenuView> children;
-
-    private Date createTime;
-    private Date updateTime;
 
 }

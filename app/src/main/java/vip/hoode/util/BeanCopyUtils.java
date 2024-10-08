@@ -11,7 +11,8 @@ import org.springframework.beans.BeanUtils;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class BeanCopyUtils {
+public final class BeanCopyUtils {
+
 
     private static final ObjectMapper JSON_MAPPER;
 
@@ -21,7 +22,17 @@ public class BeanCopyUtils {
         JSON_MAPPER.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
-    public static void copyProperties(Object source, Object target, boolean isDeep, String... ignoreProperties) {
+    private BeanCopyUtils() {
+
+    }
+
+    private static SimpleFilterProvider createIgnorePropertiesProvider(String... ignoreProperties) {
+        SimpleFilterProvider provider = new SimpleFilterProvider();
+        provider.addFilter("ignoreProperties", SimpleBeanPropertyFilter.serializeAllExcept(new HashSet<>(Arrays.asList(ignoreProperties))));
+        return provider;
+    }
+
+    public static <T> T copyProperties(Object source, T target, boolean isDeep, String... ignoreProperties) {
         if (isDeep) {
             try {
                 ObjectMapper filterMapper = JSON_MAPPER.setFilterProvider(createIgnorePropertiesProvider(ignoreProperties));
@@ -33,12 +44,23 @@ public class BeanCopyUtils {
         } else {
             BeanUtils.copyProperties(source, target, ignoreProperties);
         }
+        return target;
     }
 
-    private static SimpleFilterProvider createIgnorePropertiesProvider(String... ignoreProperties) {
-        SimpleFilterProvider provider = new SimpleFilterProvider();
-        provider.addFilter("ignoreProperties", SimpleBeanPropertyFilter.serializeAllExcept(new HashSet<>(Arrays.asList(ignoreProperties))));
-        return provider;
+    public static <T> T deepCopyProperties(Object source, T target, String... ignoreProperties) {
+        try {
+            ObjectMapper filterMapper = JSON_MAPPER.setFilterProvider(createIgnorePropertiesProvider(ignoreProperties));
+            String json = filterMapper.writeValueAsString(source);
+            filterMapper.readerForUpdating(target).readValue(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return target;
+    }
+
+    public static <T> T copyProperties(Object source, T target, String... ignoreProperties) {
+        BeanUtils.copyProperties(source, target, ignoreProperties);
+        return target;
     }
 
 
